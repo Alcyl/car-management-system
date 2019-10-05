@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cars>
+	<car1>
+		<location>Berlin</location>
+		<brand>Audi</brand>
+		<type>PKW</type>
+		<status>factory-new</status>
+		<price>15000</price>
+		<km>30</km>
+	</car1>
+
+	<car2>
+		<location>Hamburg</location>
+		<brand>Mercedes</brand>
+		<type>PKW</type>
+		<status>broken</status>
+		<price>2500</price>
+		<km>11000</km>
+	</car2>
+	
+	<car3>
+		<location>Koeln</location>
+		<brand>Mercedes</brand>
+		<type>PKW</type>
+		<status>damaged</status>
+		<price>9000</price>
+		<km>2100</km>
+	</car3>
+</cars>

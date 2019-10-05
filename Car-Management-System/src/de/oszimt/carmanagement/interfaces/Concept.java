@@ -1,3 +1,5 @@
+package de.oszimt.carmanagement.interfaces;
+
 import java.util.List;
 
 public interface Concept {
