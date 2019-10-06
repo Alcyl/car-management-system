@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="/Users/mariotripoli/Projects/java-webproject"/>
 		<item value="/Users/mariotripoli/Downloads/Java AS Projekt Car/Car-Management-System"/>
 	</list>
 	<section name="ExternalProjectImportWizard">
@@ -13,5 +14,7 @@
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
 			<item value=""/>
 		</list>
+	</section>
+	<section name="BasicNewProjectResourceWizard">
 	</section>
 </section>
