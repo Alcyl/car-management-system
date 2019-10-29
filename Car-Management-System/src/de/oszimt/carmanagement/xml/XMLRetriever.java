@@ -52,15 +52,6 @@ public class XMLRetriever {
 					// If we have an item element, we create a new item
 					if (startElement.getName().getLocalPart().equals(CAR)) {
 						car = new Car();
-						// We read the attributes from this tag and add the date
-						// attribute to our object
-						Iterator<Attribute> attributes = startElement.getAttributes();
-						while (attributes.hasNext()) {
-							Attribute attribute = attributes.next();
-							if (attribute.getName().toString().equals(LOCATION)) {
-								car.setLocation(attribute.getValue());
-							}
-						}
 					}
 
 					if (event.isStartElement()) {
@@ -101,6 +92,8 @@ public class XMLRetriever {
 			e.printStackTrace();
 		} catch (XMLStreamException e) {
 			e.printStackTrace();
+		} catch (NullPointerException e2) {
+			e2.printStackTrace();
 		}
 		return cars;
 	}
