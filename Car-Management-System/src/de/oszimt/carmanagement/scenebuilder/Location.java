@@ -2,13 +2,27 @@ package de.oszimt.carmanagement.scenebuilder;
 
 public class Location {
 	
+	public String code;
 	private String location;
 
+	public Location() {
 
-
-	public Location(String location) {
+	}
+	
+	public Location(String code, String location) {
+		this.code = code;
 		this.location = location;
 	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+
 
 	public String getLocation() {
 		return location;

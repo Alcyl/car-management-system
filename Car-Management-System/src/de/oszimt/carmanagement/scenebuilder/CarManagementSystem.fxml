@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
@@ -9,16 +9,16 @@
 
 <AnchorPane prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="430.0" layoutY="162.0" mnemonicParsing="false" text="show list" />
-      <ChoiceBox layoutX="14.0" layoutY="52.0" prefWidth="150.0" />
-      <ChoiceBox layoutX="182.0" layoutY="52.0" prefWidth="150.0" />
-      <ChoiceBox layoutX="14.0" layoutY="123.0" prefWidth="150.0" />
-      <ChoiceBox layoutX="182.0" layoutY="123.0" prefWidth="150.0" />
+      <Button layoutX="430.0" layoutY="162.0" mnemonicParsing="false" text="Show list" />
+      <ComboBox layoutX="14.0" layoutY="52.0" prefWidth="150.0" />
+      <ComboBox layoutX="174.0" layoutY="52.0" prefWidth="150.0" />
+      <ComboBox layoutX="14.0" layoutY="99.0" prefWidth="150.0" />
+      <ComboBox layoutX="174.0" layoutY="99.0" prefWidth="150.0" />
       <TextField layoutX="385.0" layoutY="49.0" />
       <TextField layoutX="385.0" layoutY="121.0" />
-      <ToggleButton layoutX="483.0" layoutY="210.0" mnemonicParsing="false" text="add" />
-      <ToggleButton layoutX="422.0" layoutY="210.0" mnemonicParsing="false" text="delete" />
-      <ToggleButton layoutX="376.0" layoutY="210.0" mnemonicParsing="false" text="edit" />
+      <ToggleButton layoutX="483.0" layoutY="210.0" mnemonicParsing="false" text="Add" />
+      <ToggleButton layoutX="422.0" layoutY="210.0" mnemonicParsing="false" text="Delete" />
+      <ToggleButton layoutX="376.0" layoutY="210.0" mnemonicParsing="false" text="Edit" />
       <Label layoutX="405.0" layoutY="26.0" text="Rental price per day" />
       <Label layoutX="380.0" layoutY="95.0" text="Number of kilometers driven" />
    </children>
