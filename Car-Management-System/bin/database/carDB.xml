@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cars>
 	<car>
+		<id>1</id>
 		<location>Berlin</location>
 		<brand>Audi</brand>
 		<type>PKW</type>
@@ -8,8 +9,8 @@
 		<price>15000</price>
 		<km>30.00</km>
 	</car>
-
 	<car>
+		<id>2</id>
 		<location>Hamburg</location>
 		<brand>Mercedes</brand>
 		<type>PKW</type>
@@ -17,8 +18,8 @@
 		<price>2500.00</price>
 		<km>11000.00</km>
 	</car>
-	
 	<car>
+		<id>3</id>
 		<location>Koeln</location>
 		<brand>Mercedes</brand>
 		<type>PKW</type>

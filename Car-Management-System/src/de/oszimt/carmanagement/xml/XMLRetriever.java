@@ -4,13 +4,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
@@ -30,8 +28,9 @@ public class XMLRetriever {
 	private static final String STATUS = "status";
 	private static final String PRICE = "price";
 	private static final String KM = "km";
+	private static final String ID = "id";
 
-	@SuppressWarnings("unchecked")
+
 	public List<Car> readXML(String xmlFile) {
 
 		List<Car> cars = new ArrayList<Car>();
@@ -53,20 +52,49 @@ public class XMLRetriever {
 					if (startElement.getName().getLocalPart().equals(CAR)) {
 						car = new Car();
 					}
-
 					if (event.isStartElement()) {
-						if (event.asStartElement().getName().getLocalPart().equals(BRAND)) {
+						if (event.asStartElement().getName().getLocalPart().equals(ID)) {
 							event = eventReader.nextEvent();
-							car.setBrand(event.asCharacters().getData());
+							car.setId(Integer.parseInt(event.asCharacters().getData()));
 							continue;
 						}
+					}
+					if (event.asStartElement().getName().getLocalPart().equals(LOCATION)) {
+						event = eventReader.nextEvent();
+						car.setLocation(event.asCharacters().getData());
+						continue;
+					}
+					if (event.asStartElement().getName().getLocalPart().equals(BRAND)) {
+						event = eventReader.nextEvent();
+						car.setBrand(event.asCharacters().getData());
+						continue;
 					}
 					if (event.asStartElement().getName().getLocalPart().equals(TYPE)) {
 						event = eventReader.nextEvent();
 						car.setType(event.asCharacters().getData());
 						continue;
 					}
+					if (event.asStartElement().getName().getLocalPart().equals(STATUS)) {
+						event = eventReader.nextEvent();
+						String status = event.asCharacters().getData();
+						switch (status) {
 
+						case "factory-new":
+							car.setStatus(Status.FACTORYNEW);
+							break;
+						case "damaged":
+							car.setStatus(Status.DAMAGED);
+							break;
+						case "broken":
+							car.setStatus(Status.BROKEN);
+							break;
+						default:
+							System.out.println("Invalid XML-Data.");
+							System.out.println("The following status are possible: factory-new, damaged, broken.");
+							break;
+						}
+						continue;
+					}
 					if (event.asStartElement().getName().getLocalPart().equals(PRICE)) {
 						event = eventReader.nextEvent();
 						car.setPrice(Double.parseDouble(event.asCharacters().getData()));
@@ -92,8 +120,6 @@ public class XMLRetriever {
 			e.printStackTrace();
 		} catch (XMLStreamException e) {
 			e.printStackTrace();
-		} catch (NullPointerException e2) {
-			e2.printStackTrace();
 		}
 		return cars;
 	}
