@@ -19,9 +19,9 @@ public class ComboBoxDropDownsDAO {
 		Type suv = new Type("SUV"); // aus DB holen
 		Type coupe = new Type("Coupe"); // aus DB holen
 		Type hatchback = new Type("Hatchback"); // aus DB holen
+		Type cabrio = new Type ("Cabrio"); // aus DB holen
 		
-		
-		ObservableList<Type> list =FXCollections.observableArrayList(suv, coupe, hatchback);
+		ObservableList<Type> list =FXCollections.observableArrayList(suv, coupe, hatchback, cabrio);
 		
 		return list;
 	}

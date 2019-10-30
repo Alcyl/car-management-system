@@ -10,7 +10,7 @@
 <AnchorPane prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button layoutX="430.0" layoutY="162.0" mnemonicParsing="false" text="Show list" />
-      <ComboBox layoutX="14.0" layoutY="52.0" prefWidth="150.0" />
+      <ComboBox fx:id="" layoutX="14.0" layoutY="52.0" prefWidth="150.0" />
       <ComboBox layoutX="174.0" layoutY="52.0" prefWidth="150.0" />
       <ComboBox layoutX="14.0" layoutY="99.0" prefWidth="150.0" />
       <ComboBox layoutX="174.0" layoutY="99.0" prefWidth="150.0" />
