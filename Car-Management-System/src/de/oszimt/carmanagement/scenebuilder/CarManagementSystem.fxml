@@ -7,15 +7,15 @@
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.oszimt.carmanagement.scenebuilder.FXMLDocumentController">
    <children>
       <Button layoutX="430.0" layoutY="162.0" mnemonicParsing="false" text="Show list" />
-      <ComboBox fx:id="" layoutX="14.0" layoutY="52.0" prefWidth="150.0" />
-      <ComboBox layoutX="174.0" layoutY="52.0" prefWidth="150.0" />
-      <ComboBox layoutX="14.0" layoutY="99.0" prefWidth="150.0" />
-      <ComboBox layoutX="174.0" layoutY="99.0" prefWidth="150.0" />
-      <TextField layoutX="385.0" layoutY="49.0" />
-      <TextField layoutX="385.0" layoutY="121.0" />
+      <ComboBox fx:id="location" layoutX="14.0" layoutY="52.0" prefWidth="150.0" promptText="Location" />
+      <ComboBox fx:id="type" layoutX="174.0" layoutY="52.0" prefWidth="150.0" promptText="Type" />
+      <ComboBox fx:id="brand" layoutX="14.0" layoutY="99.0" prefWidth="150.0" promptText="Brand" />
+      <ComboBox fx:id="status" layoutX="174.0" layoutY="99.0" prefWidth="150.0" promptText="Status" />
+      <TextField fx:id="rentalPricePerDay" layoutX="385.0" layoutY="49.0" />
+      <TextField fx:id="numberOfKmDriven" layoutX="385.0" layoutY="121.0" />
       <ToggleButton layoutX="483.0" layoutY="210.0" mnemonicParsing="false" text="Add" />
       <ToggleButton layoutX="422.0" layoutY="210.0" mnemonicParsing="false" text="Delete" />
       <ToggleButton layoutX="376.0" layoutY="210.0" mnemonicParsing="false" text="Edit" />
