@@ -17,9 +17,21 @@ public class Testmain {
 //            System.out.println(item.getStatus()+"\n");
 //        }
 		
-		XmlDatabase db1 = XmlDatabase.getInstance();
-		List<Car> cars =new ArrayList<>();
-		cars = db1.getAllCars();
+//		XmlDatabase db1 = XmlDatabase.getInstance();
+//		List<Car> cars = new ArrayList<>();
+//		cars = db1.getAllCars();
+		
+		
+		XMLWriter writer = new XMLWriter();
+		writer.setFile("D:\\Dateien\\Eclipse-WorkingSpace\\car-management-system\\Car-Management-System\\res\\database\\carDB.xml");
+//		for(Car car:writer.getAllCars()) {
+//			System.out.println(car.getId());
+//		}
+		  try {
+	            writer.deleteAllItems();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
 
 	}
 

@@ -13,7 +13,7 @@ public interface Concept {
 	String getStatus(int id);
 	double getPrice(int id);
 	double getKm(int id);
-	void addNewCar(String location, String brand , String type, String status, double price, double km);
+	void addNewCar(int id, String location, String brand , String type, String status, double price, double km);
 	void deleteCar(int id);
 	void deleteAllCars();
 	void editCar(int id);

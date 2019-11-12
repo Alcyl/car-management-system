@@ -9,12 +9,14 @@ public class XmlDatabase implements Concept {
 
 	private static XmlDatabase instance;
 	private XMLRetriever retriever;
+	private XMLWriter writer;
 	// relative path to be added
-	private static final String XMLFILEPATH = "C:\\Users\\user\\Desktop\\car-management-system\\Car-Management-System\\res\\database\\carDB.xml"; // relative
+	private static final String XMLFILEPATH = "D:\\Dateien\\Eclipse-WorkingSpace\\car-management-system\\Car-Management-System\\res\\database\\carDB.xml"; // relative
 	private List<Car> readxml;
 
 	private XmlDatabase() {
 		retriever = new XMLRetriever();
+		writer = new XMLWriter();
 	}
 
 	public static XmlDatabase getInstance() {
@@ -121,20 +123,32 @@ public class XmlDatabase implements Concept {
 	}
 
 	@Override
-	public void addNewCar(String location, String brand, String type, String status, double price, double km) {
-		// TODO Auto-generated method stub
+	public void addNewCar(int id, String location, String brand, String type, String status, double price, double km){
+		
+		try {
+			writer.addNewNode(id, location, brand, type, status, price, km);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
 	@Override
 	public void deleteCar(int id) {
-		// TODO Auto-generated method stub
-
+		try {
+			writer.deleteItem(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void deleteAllCars() {
-		// TODO Auto-generated method stub
+		try {
+			writer.deleteAllItems();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
