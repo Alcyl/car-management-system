@@ -16,30 +16,29 @@ import javax.xml.stream.events.XMLEvent;
 
 public class XMLWriter {
 
-	private String configFile;
-	private List<Car> readxml = new ArrayList<>();
-	private XMLRetriever retriever = new XMLRetriever();
-	// relative path to be added
-	private static final String XMLFILEPATH = "D:\\Dateien\\Eclipse-WorkingSpace\\car-management-system\\Car-Management-System\\res\\database\\carDB.xml"; // relative
-	// private int id;
-	// private String location;
-	// private String brand;
-	// private String type;
-	// private String status;
-	// private double price;
-	// private double km;
-
-	public void setFile(String configFile) {
-		this.configFile = configFile;
+	private String xmlFilepath;
+	private List<Car> readxml;
+	private XMLRetriever retriever;
+	
+	public XMLWriter(String xmlFilepath) {
+		this.xmlFilepath = xmlFilepath;
+		retriever = new XMLRetriever (xmlFilepath);
+		readxml = new ArrayList<>();
 	}
 
-	public void addNewNode(int id, String location, String brand, String type, String status, double price, double km)
+	public void addNewNode(int id, String location, String brand, String type, Status status, double price, double km)
 			throws Exception {
+		
 		List<Car> cars = getAllCars();
+		
+		if (checkIfIDAlreadyExists(cars, id)) {
+			System.out.println("ID is already taken by other car.");
+			return;
+		}
 		// create an XMLOutputFactory
 		XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
 		// create XMLEventWriter
-		XMLEventWriter eventWriter = outputFactory.createXMLEventWriter(new FileOutputStream(configFile));
+		XMLEventWriter eventWriter = outputFactory.createXMLEventWriter(new FileOutputStream(xmlFilepath));
 		// create an EventFactory
 		XMLEventFactory eventFactory = XMLEventFactory.newInstance();
 		XMLEvent end = eventFactory.createDTD("\n");
@@ -53,27 +52,20 @@ public class XMLWriter {
 		StartElement configStartElement = eventFactory.createStartElement("", "", "cars");
 		eventWriter.add(configStartElement);
 		eventWriter.add(end);
-		eventWriter.add(tab);
 
 		for (Car car : cars) {
+			eventWriter.add(tab);
 			configStartElement = eventFactory.createStartElement("", "", "car");
 			eventWriter.add(configStartElement);
 			eventWriter.add(end);
 
 			// Write the different nodes
-			eventWriter.add(tab);
 			createNode(eventWriter, "id", Integer.toString(car.getId()));
-			eventWriter.add(tab);
 			createNode(eventWriter, "location", car.getLocation());
-			eventWriter.add(tab);
 			createNode(eventWriter, "brand", car.getBrand());
-			eventWriter.add(tab);
 			createNode(eventWriter, "type", car.getType());
-			eventWriter.add(tab);
 			createNode(eventWriter, "status", car.getStatus());
-			eventWriter.add(tab);
 			createNode(eventWriter, "price", Double.toString(car.getPrice()));
-			eventWriter.add(tab);
 			createNode(eventWriter, "km", Double.toString(car.getKm()));
 
 			eventWriter.add(tab);
@@ -82,24 +74,18 @@ public class XMLWriter {
 		}
 
 		// add specific opening tag (car)
+		eventWriter.add(tab);
 		configStartElement = eventFactory.createStartElement("", "", "car");
 		eventWriter.add(configStartElement);
 		eventWriter.add(end);
 
 		// Write the different nodes of new car
-		eventWriter.add(tab);
 		createNode(eventWriter, "id", Integer.toString(id));
-		eventWriter.add(tab);
 		createNode(eventWriter, "location", location);
-		eventWriter.add(tab);
 		createNode(eventWriter, "brand", brand);
-		eventWriter.add(tab);
 		createNode(eventWriter, "type", type);
-		eventWriter.add(tab);
-		createNode(eventWriter, "status", status);
-		eventWriter.add(tab);
+		createNode(eventWriter, "status", status.toString());
 		createNode(eventWriter, "price", Double.toString(price));
-		eventWriter.add(tab);
 		createNode(eventWriter, "km", Double.toString(km));
 
 		// add specific ending tag (car)
@@ -118,7 +104,7 @@ public class XMLWriter {
 		// create an XMLOutputFactory
 		XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
 		// create XMLEventWriter
-		XMLEventWriter eventWriter = outputFactory.createXMLEventWriter(new FileOutputStream(configFile));
+		XMLEventWriter eventWriter = outputFactory.createXMLEventWriter(new FileOutputStream(xmlFilepath));
 		// create an EventFactory
 		XMLEventFactory eventFactory = XMLEventFactory.newInstance();
 		XMLEvent end = eventFactory.createDTD("\n");
@@ -132,7 +118,6 @@ public class XMLWriter {
 		StartElement configStartElement = eventFactory.createStartElement("", "", "cars");
 		eventWriter.add(configStartElement);
 		eventWriter.add(end);
-		eventWriter.add(tab);
 
 		for (Car car : cars) {
 
@@ -142,19 +127,12 @@ public class XMLWriter {
 				eventWriter.add(end);
 
 				// Write the different nodes
-				eventWriter.add(tab);
 				createNode(eventWriter, "id", Integer.toString(car.getId()));
-				eventWriter.add(tab);
 				createNode(eventWriter, "location", car.getLocation());
-				eventWriter.add(tab);
 				createNode(eventWriter, "brand", car.getBrand());
-				eventWriter.add(tab);
 				createNode(eventWriter, "type", car.getType());
-				eventWriter.add(tab);
 				createNode(eventWriter, "status", car.getStatus());
-				eventWriter.add(tab);
 				createNode(eventWriter, "price", Double.toString(car.getPrice()));
-				eventWriter.add(tab);
 				createNode(eventWriter, "km", Double.toString(car.getKm()));
 
 				eventWriter.add(tab);
@@ -176,6 +154,8 @@ public class XMLWriter {
 		// create Start node
 		StartElement sElement = eventFactory.createStartElement("", "", name);
 		eventWriter.add(tab);
+		// carefully is new
+		eventWriter.add(tab);
 		eventWriter.add(sElement);
 		// create Content
 		Characters characters = eventFactory.createCharacters(value);
@@ -191,7 +171,7 @@ public class XMLWriter {
 		// create an XMLOutputFactory
 		XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
 		// create XMLEventWriter
-		XMLEventWriter eventWriter = outputFactory.createXMLEventWriter(new FileOutputStream(configFile));
+		XMLEventWriter eventWriter = outputFactory.createXMLEventWriter(new FileOutputStream(xmlFilepath));
 		// create an EventFactory
 		XMLEventFactory eventFactory = XMLEventFactory.newInstance();
 		XMLEvent end = eventFactory.createDTD("\n");
@@ -211,10 +191,10 @@ public class XMLWriter {
 		eventWriter.close();
 	}
 
-	public List<Car> getAllCars() {
+	private List<Car> getAllCars() {
 		List<Car> cars = new ArrayList<>();
 
-		readxml = retriever.readXML(XMLFILEPATH);
+		readxml = retriever.readXML();
 
 		for (Car car : readxml) {
 			cars.add(car);
@@ -225,6 +205,16 @@ public class XMLWriter {
 		} else {
 			return null;
 		}
+	}
+	
+	private boolean checkIfIDAlreadyExists(List<Car> cars, int id) {
+		
+		for (Car car : cars) {
+			if (car.getId() == id) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

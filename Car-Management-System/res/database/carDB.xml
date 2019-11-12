@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <cars>
 	<car>
 		<id>1</id>
@@ -6,8 +6,8 @@
 		<brand>Audi</brand>
 		<type>PKW</type>
 		<status>factory-new</status>
-		<price>15000</price>
-		<km>30.00</km>
+		<price>15000.0</price>
+		<km>30.0</km>
 	</car>
 	<car>
 		<id>2</id>
@@ -15,8 +15,8 @@
 		<brand>Mercedes</brand>
 		<type>PKW</type>
 		<status>broken</status>
-		<price>2500.00</price>
-		<km>11000.00</km>
+		<price>2500.0</price>
+		<km>11000.0</km>
 	</car>
 	<car>
 		<id>3</id>
@@ -24,7 +24,25 @@
 		<brand>Mercedes</brand>
 		<type>PKW</type>
 		<status>damaged</status>
-		<price>9000.00</price>
-		<km>2100.00</km>
+		<price>9000.0</price>
+		<km>2100.0</km>
+	</car>
+	<car>
+		<id>4</id>
+		<location>location</location>
+		<brand>brand</brand>
+		<type>type</type>
+		<status>broken</status>
+		<price>3000.0</price>
+		<km>50.0</km>
+	</car>
+	<car>
+		<id>5</id>
+		<location>Hamburg</location>
+		<brand>Opel</brand>
+		<type>Some type</type>
+		<status>broken</status>
+		<price>100.0</price>
+		<km>4000.0</km>
 	</car>
 </cars>

@@ -6,29 +6,23 @@ import java.util.List;
 import de.oszimt.carmanagement.interfaces.Concept;
 
 public class XmlDatabase implements Concept {
-
-	private static XmlDatabase instance;
+	
+	// TODO: Konstruktur und Anbindung an Backend realisieren. Aufgabe vom 12.11.19
+	
 	private XMLRetriever retriever;
 	private XMLWriter writer;
-	// relative path to be added
-	private static final String XMLFILEPATH = "D:\\Dateien\\Eclipse-WorkingSpace\\car-management-system\\Car-Management-System\\res\\database\\carDB.xml"; // relative
 	private List<Car> readxml;
+	private static final String XMLFILEPATH = "res\\database\\carDB.xml";
 
-	private XmlDatabase() {
-		retriever = new XMLRetriever();
-		writer = new XMLWriter();
+	public XmlDatabase() {
+		retriever = new XMLRetriever(XMLFILEPATH);
+		writer = new XMLWriter(XMLFILEPATH);
 	}
 
-	public static XmlDatabase getInstance() {
-		if (XmlDatabase.instance == null) {
-			XmlDatabase.instance = new XmlDatabase();
-		}
-		return XmlDatabase.instance;
-	}
-
+	
 	@Override
 	public String getLocation(int id) {
-		readxml = retriever.readXML(XMLFILEPATH);
+		readxml = retriever.readXML();
 
 		for (Car car : readxml) {
 			if (car.getId() == id) {
@@ -42,7 +36,7 @@ public class XmlDatabase implements Concept {
 	@Override
 	public List<String> getAllLocations() {
 		List<String> locations = new ArrayList<>();
-		readxml = retriever.readXML(XMLFILEPATH);
+		readxml = retriever.readXML();
 
 		for (Car car : readxml) {
 			locations.add(car.getLocation());
@@ -58,7 +52,7 @@ public class XmlDatabase implements Concept {
 
 	@Override
 	public String getType(int id) {
-		readxml = retriever.readXML(XMLFILEPATH);
+		readxml = retriever.readXML();
 
 		for (Car car : readxml) {
 			if (car.getId() == id) {
@@ -71,7 +65,7 @@ public class XmlDatabase implements Concept {
 
 	@Override
 	public String getBrand(int id) {
-		readxml = retriever.readXML(XMLFILEPATH);
+		readxml = retriever.readXML();
 
 		for (Car car : readxml) {
 			if (car.getId() == id) {
@@ -84,7 +78,7 @@ public class XmlDatabase implements Concept {
 
 	@Override
 	public String getStatus(int id) {
-		readxml = retriever.readXML(XMLFILEPATH);
+		readxml = retriever.readXML();
 
 		for (Car car : readxml) {
 			if (car.getId() == id) {
@@ -97,7 +91,7 @@ public class XmlDatabase implements Concept {
 
 	@Override
 	public double getPrice(int id) {
-		readxml = retriever.readXML(XMLFILEPATH);
+		readxml = retriever.readXML();
 
 		for (Car car : readxml) {
 			if (car.getId() == id) {
@@ -111,7 +105,7 @@ public class XmlDatabase implements Concept {
 
 	@Override
 	public double getKm(int id) {
-		readxml = retriever.readXML(XMLFILEPATH);
+		readxml = retriever.readXML();
 
 		for (Car car : readxml) {
 			if (car.getId() == id) {
@@ -123,7 +117,7 @@ public class XmlDatabase implements Concept {
 	}
 
 	@Override
-	public void addNewCar(int id, String location, String brand, String type, String status, double price, double km){
+	public void addNewCar(int id, String location, String brand, String type, Status status, double price, double km){
 		
 		try {
 			writer.addNewNode(id, location, brand, type, status, price, km);
@@ -160,9 +154,9 @@ public class XmlDatabase implements Concept {
 
 	@Override
 	public List<Car> getAllCars() {
+		
 		List<Car> cars = new ArrayList<>();
-
-		readxml = retriever.readXML(XMLFILEPATH);
+		readxml = retriever.readXML();
 
 		for (Car car : readxml) {
 			cars.add(car);

@@ -7,5 +7,22 @@ package de.oszimt.carmanagement.xml;
  */
 public enum Status {
 	
-	FACTORYNEW, BROKEN, DAMAGED
+	FACTORYNEW, BROKEN, DAMAGED;
+	
+	public String toString() {
+		switch(this) {
+		case FACTORYNEW:
+			return "factory-new";
+		case BROKEN:
+			return "broken";
+		case DAMAGED:
+			return "damaged";
+			default:
+				return null;
+		}
+	}
+	
+	
 }
+
+

@@ -29,16 +29,20 @@ public class XMLRetriever {
 	private static final String PRICE = "price";
 	private static final String KM = "km";
 	private static final String ID = "id";
+	private String xmlFilepath;
 
-
-	public List<Car> readXML(String xmlFile) {
+	public XMLRetriever(String xmlFilepath) {
+		this.xmlFilepath = xmlFilepath;
+	}
+	
+	public List<Car> readXML() {
 
 		List<Car> cars = new ArrayList<Car>();
 		try {
 			// First, create a new XMLInputFactory
 			XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 			// Setup a new eventReader
-			InputStream in = new FileInputStream(xmlFile);
+			InputStream in = new FileInputStream(xmlFilepath);
 			XMLEventReader eventReader = inputFactory.createXMLEventReader(in);
 			// read the XML document
 			Car car = null;
