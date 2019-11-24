@@ -14,10 +14,10 @@ public interface Concept {
 	String getStatus(int id);
 	double getPrice(int id);
 	double getKm(int id);
-	void addNewCar(int id, String location, String brand , String type, Status status, double price, double km);
+	void addNewCar(int id, String location, String brand , String type, Status status, double price, double km, int brand_id);
 	void deleteCar(int id);
 	void deleteAllCars();
-	void editCar(int id);
+	void editCar(int id, String location, String brand, String type, Status status, double price, double km, int brand_id);
 	List<Car> getAllCars();
 	
 }
