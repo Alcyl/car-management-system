@@ -117,7 +117,7 @@ public class XmlDatabase implements Concept {
 	}
 
 	@Override
-	public void addNewCar(int id, String location, String brand, String type, Status status, double price, double km){
+	public void addNewCar(int id, String location, String brand, String type, Status status, double price, double km, int brand_id){
 		
 		try {
 			writer.addNewNode(id, location, brand, type, status, price, km);
@@ -147,9 +147,29 @@ public class XmlDatabase implements Concept {
 	}
 
 	@Override
-	public void editCar(int id) {
-		// TODO Auto-generated method stub
+	public void editCar(int id, String location, String brand, String type, Status status, double price, double km, int brand_id) {
+		
+		try {
+			writer.deleteItem(id);
+			writer.addNewNode(id, location, brand, type, status, price, km);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private Car getCar(int id) {
+	
+		readxml = retriever.readXML();
 
+		for (Car car : readxml) {
+			
+			if (car.getId() == id) {
+				return car;
+			}
+		}
+		return null;
 	}
 
 	@Override
