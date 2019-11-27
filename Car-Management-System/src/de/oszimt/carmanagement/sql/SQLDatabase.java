@@ -8,11 +8,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.oszimt.carmanagement.interfaces.Concept;
+import de.oszimt.carmanagement.interfaces.Datalayer;
 import de.oszimt.carmanagement.xml.Car;
 import de.oszimt.carmanagement.xml.Status;
 
-public class SQLDatabase implements Concept {
+public class SQLDatabase implements Datalayer {
 	
 	private SQLConnector connector;
 	private Connection con;

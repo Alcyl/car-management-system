@@ -5,7 +5,7 @@ import java.util.List;
 import de.oszimt.carmanagement.xml.Car;
 import de.oszimt.carmanagement.xml.Status;
 
-public interface Concept {
+public interface Datalayer {
 
 	String getLocation(int id);
 	List<String> getAllLocations();

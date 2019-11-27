@@ -3,9 +3,9 @@ package de.oszimt.carmanagement.xml;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.oszimt.carmanagement.interfaces.Concept;
+import de.oszimt.carmanagement.interfaces.Datalayer;
 
-public class XmlDatabase implements Concept {
+public class XmlDatabase implements Datalayer {
 	
 	// TODO: Konstruktur und Anbindung an Backend realisieren. Aufgabe vom 12.11.19
 	
