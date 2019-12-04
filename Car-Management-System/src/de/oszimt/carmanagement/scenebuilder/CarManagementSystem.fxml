@@ -6,7 +6,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="550.0" prefWidth="597.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.oszimt.carmanagement.scenebuilder.FXMLDocumentController">
@@ -21,8 +20,8 @@
       <TextField fx:id="numberOfKmDriven" layoutX="385.0" layoutY="121.0" />
       <Button fx:id="showList" layoutX="14.0" layoutY="148.0" mnemonicParsing="false" text="Show list" />
       <Button fx:id="add" layoutX="89.0" layoutY="148.0" mnemonicParsing="false" text="Add" />
-      <Button fx:id="edit" layoutX="195.0" layoutY="148.0" mnemonicParsing="false" text="Delete" />
-      <Button fx:id="delete" layoutX="142.0" layoutY="148.0" mnemonicParsing="false" text="Edit" />     
+      <Button fx:id="delete" layoutX="195.0" layoutY="148.0" mnemonicParsing="false" text="Delete" />
+      <Button fx:id="edit" layoutX="142.0" layoutY="148.0" mnemonicParsing="false" text="Edit" />
       <TableView fx:id="carManagementTable" layoutX="42.0" layoutY="206.0" prefHeight="319.0" prefWidth="512.0">
         <columns>
           <TableColumn fx:id="colId" prefWidth="75.0" text="Id" />
@@ -30,7 +29,7 @@
             <TableColumn fx:id="colBrand" prefWidth="75.0" text="brand" />
             <TableColumn fx:id="colType" prefWidth="75.0" text="type" />
             <TableColumn fx:id="colStatus" prefWidth="75.0" text="status" />
-            <TableColumn fx:id="colPrice" prefWidth="75.0" text="price" />
+            <TableColumn fx:id="colPrice" prefWidth="75.0" text="price (€)" />
             <TableColumn fx:id="colKm" prefWidth="61.0" text="km" />
         </columns>
       </TableView>

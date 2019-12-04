@@ -20,74 +20,74 @@ public class TableOfCars {
 	private SimpleDoubleProperty colPrice;
 	private SimpleIntegerProperty colKm;
 	
-	public TableOfCars() {		
-	}
+//	public TableOfCars() {		
+//	}
 	
 	public TableOfCars (int id, String location, String brand, String type, String status, double price, int km) {
-		colId = new SimpleIntegerProperty(id);
-		colLocation = new SimpleStringProperty(location);
-		colBrand = new SimpleStringProperty(brand);
-		colType = new SimpleStringProperty(type);
-		colStatus = new SimpleStringProperty(status);
-		colPrice = new SimpleDoubleProperty(price);
-		colKm = new SimpleIntegerProperty(km);
+		this.colId = new SimpleIntegerProperty(id);
+		this.colLocation = new SimpleStringProperty(location);
+		this.colBrand = new SimpleStringProperty(brand);
+		this.colType = new SimpleStringProperty(type);
+		this.colStatus = new SimpleStringProperty(status);
+		this.colPrice = new SimpleDoubleProperty(price);
+		this.colKm = new SimpleIntegerProperty(km);
 
     }
 
-	public SimpleIntegerProperty getColId() {
-		return colId;
+	public Integer getColId() {
+		return colId.get();
 	}
 
-	public void setColId(SimpleIntegerProperty colId) {
-		this.colId = colId;
+	public void setColId(Integer value) {
+		colId.set(value);
 	}
 
-	public SimpleStringProperty getColLocation() {
-		return colLocation;
+	public String getColLocation() {
+		return colLocation.get();
 	}
 
-	public void setColLocation(SimpleStringProperty colLocation) {
-		this.colLocation = colLocation;
+	public void setColLocation(String value) {
+		colLocation.set(value);
 	}
 
-	public SimpleStringProperty getColBrand() {
-		return colBrand;
+	public String getColBrand() {
+		return colBrand.get();
 	}
 
-	public void setColBrand(SimpleStringProperty colBrand) {
-		this.colBrand = colBrand;
+	public void setColBrand(String value) {
+		colBrand.set(value);
 	}
 
-	public SimpleStringProperty getColType() {
-		return colType;
+	public String getColType() {
+		return colType.get();
 	}
 
-	public void setColType(SimpleStringProperty colType) {
-		this.colType = colType;
+	public void setColType(String value) {
+		colType.set(value);
 	}
 
-	public SimpleStringProperty getColStatus() {
-		return colStatus;
+	public String getColStatus() {
+		return colStatus.get();
 	}
 
-	public void setColStatus(SimpleStringProperty colStatus) {
-		this.colStatus = colStatus;
+	public void setColStatus(String value) {
+		colStatus.set(value);;
 	}
 
-	public SimpleDoubleProperty getColPrice() {
-		return colPrice;
+	public Double getColPrice() {
+		return colPrice.get();
 	}
 
-	public void setColPrice(SimpleDoubleProperty colPrice) {
-		this.colPrice = colPrice;
+	public void setColPrice(Double value) {
+		colPrice.set(value);
 	}
 
-	public SimpleIntegerProperty getColKm() {
-		return colKm;
+	public Integer getColKm() {
+		return colKm.get();
 	}
 
-	public void setColKm(SimpleIntegerProperty colKm) {
-		this.colKm = colKm;
+	public void setColKm(Integer value) {
+		colKm.set(value);
 	}
 
 	@Override
@@ -95,57 +95,5 @@ public class TableOfCars {
 		return "TableOfCars [colId=" + colId + ", colLocation=" + colLocation + ", colBrand=" + colBrand + ", colType="
 				+ colType + ", colStatus=" + colStatus + ", colPrice=" + colPrice + ", colKm=" + colKm + "]";
 	}
-	
-	
-	
-	
-	
-	
- /*
-	public SimpleIntegerProperty getColId() {
-		return colId;
-	}
-	public SimpleStringProperty getColLocation() {
-		return colLocation;
-	}
-	public SimpleStringProperty getColBrand() {
-		return colBrand;
-	}
-	public SimpleStringProperty getColType() {
-		return colType;
-	}
-	public SimpleStringProperty getColStatus() {
-		return colStatus;
-	}
-	public SimpleStringProperty getColPrice() {
-		return colPrice;
-	}
-	public SimpleIntegerProperty getColKm() {
-		return colKm;
-	}
-	
-	public void showList(ActionEvent event) {
-	}
-	
-	public void add(ActionEvent event) {
-	}
-	
-	public void edit(ActionEvent event) {
-	}
-	
-	public void delete(ActionEvent event) {
-	}
-	
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		
-	}
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	*/
 
 }
