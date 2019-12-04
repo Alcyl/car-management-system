@@ -1,15 +1,6 @@
 <?xml version="1.0"?>
 <cars>
 	<car>
-		<id>1</id>
-		<location>Berlin</location>
-		<brand>Audi</brand>
-		<type>PKW</type>
-		<status>factory-new</status>
-		<price>15000.0</price>
-		<km>30.0</km>
-	</car>
-	<car>
 		<id>2</id>
 		<location>Hamburg</location>
 		<brand>Mercedes</brand>
@@ -41,6 +32,15 @@
 		<location>Hamburg</location>
 		<brand>Opel</brand>
 		<type>Some type</type>
+		<status>broken</status>
+		<price>100.0</price>
+		<km>4000.0</km>
+	</car>
+	<car>
+		<id>1</id>
+		<location>Hamburg</location>
+		<brand>Opel</brand>
+		<type>LKW</type>
 		<status>broken</status>
 		<price>100.0</price>
 		<km>4000.0</km>
