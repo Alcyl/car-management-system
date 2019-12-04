@@ -1,10 +1,10 @@
 package de.oszimt.carmanagement.scenebuilder;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import de.oszimt.carmanagement.interfaces.Concept;
+import de.oszimt.carmanagement.concepts.Concept1;
 import de.oszimt.carmanagement.interfaces.DataStorage;
+import de.oszimt.carmanagement.interfaces.ITechconcept;
+import de.oszimt.carmanagement.xml.XmlDatabase;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,22 +12,20 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class GUI extends Application {
-	private Concept concept;
-	private DataStorage datastorage;
-
 	
-	public GUI(Concept concept) {	
+	
+	private ITechconcept concept;
+	
+	public GUI(ITechconcept concept) {
 		this.concept = concept;
-		this.datastorage = datastorage;
 	}
-
-	/**
-	 * @param args the command line arguments
-	 */
+	
+	public GUI() {}
+	
 
 	public static void main(String[] args) {
-		launch(args);
-
+		GUI gui1 = new GUI(new Concept1(new XmlDatabase()));		
+		gui1.launch(args);
 	}
 
 	@Override
