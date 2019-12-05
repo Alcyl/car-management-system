@@ -37,9 +37,4 @@ public class GUI extends Application {
 		stage.show();
 
 	}
-	
-	public void test() {
-		System.out.println("Das ist ein Test");
-	}
-
 }

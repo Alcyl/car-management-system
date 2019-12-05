@@ -1,6 +1,7 @@
 	package de.oszimt.carmanagement.scenebuilder;
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -22,6 +27,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class FXMLDocumentController implements Initializable {
 	@FXML
@@ -77,6 +83,16 @@ public class FXMLDocumentController implements Initializable {
 	@FXML
 	TextField kmInput;
 	
+	@FXML
+	private void handleButtonAction(ActionEvent event) throws IOException {
+		Parent addPageParent = FXMLLoader.load(getClass().getResource("AddPage.fxml"));
+		Scene addPageScene = new Scene(addPageParent);
+		Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		appStage.hide();
+		appStage.setScene(addPageScene);
+		appStage.show();
+	}
+	
 	
 	
 	
@@ -122,7 +138,7 @@ public class FXMLDocumentController implements Initializable {
 //		carManagementTable.getSelectionModel().selectedIndexProperty().addListener(
 //			new RowSelectChangeListener());
 		
-		add.setOnAction(new AddButtonListener());
+//		add.setOnAction(new AddButtonListener());
 		delete.setOnAction(new DeleteButtonListener());
 		
 	}
@@ -195,24 +211,25 @@ public class FXMLDocumentController implements Initializable {
 	
 			return data;
 		}
+	 
 	
-	private class AddButtonListener implements EventHandler<ActionEvent> {
-
-		@Override
-		public void handle(ActionEvent e) {
-
-			// Create a new row after last row
-			TableOfCars car = new TableOfCars(0, "...", "...", "...", "...", 0.00, 0);
-			data.add(car);
-			int row = data.size() - 1;
-
-//			 Select the new row
-			carManagementTable.requestFocus();
-			carManagementTable.getSelectionModel().select(row);
-			carManagementTable.getFocusModel().focus(row);
-		
-		}
-	}
+//	private class AddButtonListener implements EventHandler<ActionEvent> {
+//
+//		@Override
+//		public void handle(ActionEvent e) {
+//
+//			// Create a new row after last row
+//			TableOfCars car = new TableOfCars(0, "...", "...", "...", "...", 0.00, 0);
+//			data.add(car);
+//			int row = data.size() - 1;
+//
+////			 Select the new row
+//			carManagementTable.requestFocus();
+//			carManagementTable.getSelectionModel().select(row);
+//			carManagementTable.getFocusModel().focus(row);
+//		
+//		}
+//	}
 	
 	// delete row (abfangen, wenn Tabelle leer ist)
 	private class DeleteButtonListener implements EventHandler<ActionEvent> {
