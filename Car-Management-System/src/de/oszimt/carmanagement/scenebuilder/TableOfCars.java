@@ -7,11 +7,13 @@ import javafx.application.Application;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 
 public class TableOfCars {
+
 	private SimpleIntegerProperty colId;
 	private SimpleStringProperty colLocation;
 	private SimpleStringProperty colBrand;
@@ -19,11 +21,11 @@ public class TableOfCars {
 	private SimpleStringProperty colStatus;
 	private SimpleDoubleProperty colPrice;
 	private SimpleIntegerProperty colKm;
-	
-//	public TableOfCars() {		
-//	}
-	
-	public TableOfCars (int id, String location, String brand, String type, String status, double price, int km) {
+
+	public TableOfCars() {
+	}
+
+	public TableOfCars(int id, String location, String brand, String type, String status, double price, int km) {
 		this.colId = new SimpleIntegerProperty(id);
 		this.colLocation = new SimpleStringProperty(location);
 		this.colBrand = new SimpleStringProperty(brand);
@@ -32,7 +34,7 @@ public class TableOfCars {
 		this.colPrice = new SimpleDoubleProperty(price);
 		this.colKm = new SimpleIntegerProperty(km);
 
-    }
+	}
 
 	public Integer getColId() {
 		return colId.get();
@@ -46,12 +48,20 @@ public class TableOfCars {
 		return colLocation.get();
 	}
 
+	public final StringProperty locationProperty() {
+		return this.colLocation;
+	}
+
 	public void setColLocation(String value) {
 		colLocation.set(value);
 	}
 
 	public String getColBrand() {
 		return colBrand.get();
+	}
+
+	public final StringProperty brandProperty() {
+		return this.colBrand;
 	}
 
 	public void setColBrand(String value) {
@@ -71,7 +81,8 @@ public class TableOfCars {
 	}
 
 	public void setColStatus(String value) {
-		colStatus.set(value);;
+		colStatus.set(value);
+		;
 	}
 
 	public Double getColPrice() {

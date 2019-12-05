@@ -1,49 +1,28 @@
-	package de.oszimt.carmanagement.scenebuilder;
+package de.oszimt.carmanagement.scenebuilder;
 
-
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 
 public class FXMLDocumentController implements Initializable {
-	@FXML
-	private ComboBox<String> location;
-	@FXML
-	private ComboBox<String> type;
-	@FXML
-	private ComboBox<String> brand;
-	@FXML
-	private ComboBox<String> status;
-	@FXML
-	private TextField rentalPricePerDay;
-	@FXML
-	private TextField numberOfKmDriven;
-	@FXML
-	private Button showList;
+
 	@FXML
 	private Button add;
 	@FXML
@@ -59,14 +38,16 @@ public class FXMLDocumentController implements Initializable {
 	@FXML
 	private TableColumn<TableOfCars, String> colBrand;
 	@FXML
-	private TableColumn<TableOfCars,String> colType;
+	private TableColumn<TableOfCars, String> colType;
 	@FXML
-	private TableColumn<TableOfCars,String> colStatus;
+	private TableColumn<TableOfCars, String> colStatus;
 	@FXML
 	private TableColumn<TableOfCars, Double> colPrice;
 	@FXML
 	private TableColumn<TableOfCars, Integer> colKm;
-	
+	@FXML
+	private TextField searchField;
+
 	// all input fields
 	@FXML
 	TextField idInput;
@@ -82,32 +63,11 @@ public class FXMLDocumentController implements Initializable {
 	TextField priceInput;
 	@FXML
 	TextField kmInput;
-	
-	@FXML
-	private void handleButtonAction(ActionEvent event) throws IOException {
-		Parent addPageParent = FXMLLoader.load(getClass().getResource("AddPage.fxml"));
-		Scene addPageScene = new Scene(addPageParent);
-		Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		appStage.hide();
-		appStage.setScene(addPageScene);
-		appStage.show();
-	}
-	
-	
-	
-	
+
 	private ObservableList<TableOfCars> data;
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		location.getItems().addAll("Berlin", "Köln", "Hamburg");
-		type.getItems().addAll("SUV", "Coupe", "Hatchback");
-		brand.getItems().addAll("Mercedes", "BMW", "Audi");
-		status.getItems().addAll("In repair", "Available", "Rented");
-		
-		textFieldValidator(rentalPricePerDay);
-		textFieldValidator(numberOfKmDriven);
-		
 		colId.setCellValueFactory(new PropertyValueFactory<TableOfCars, Integer>("colId"));
 		colLocation.setCellValueFactory(new PropertyValueFactory<TableOfCars, String>("colLocation"));
 		colBrand.setCellValueFactory(new PropertyValueFactory<TableOfCars, String>("colBrand"));
@@ -115,122 +75,129 @@ public class FXMLDocumentController implements Initializable {
 		colStatus.setCellValueFactory(new PropertyValueFactory<TableOfCars, String>("colStatus"));
 		colPrice.setCellValueFactory(new PropertyValueFactory<TableOfCars, Double>("colPrice"));
 		colKm.setCellValueFactory(new PropertyValueFactory<TableOfCars, Integer>("colKm"));
-		
+
 		carManagementTable.setItems(data);
-		
+
 		data = getInitialTableData();
 		carManagementTable.setItems(data);
-//		carManagementTable.setEditable(true);
-		
-		// editable
-//		colId.setCellValueFactory(new PropertyValueFactory<TableOfCars, Integer>("colId"));
-//		colId.setOnEditCommit(new EventHandler<CellEditEvent<TableOfCars, Integer>>() {
-//			@Override
-//			public void handle(CellEditEvent<TableOfCars, Integer> t) {
-//
-//				((TableOfCars) t.getTableView().getItems().get(
-//					t.getTablePosition().getRow())
-//				).setColId(t.getNewValue());
-//			}
-//		});
-//		
-//
-//		carManagementTable.getSelectionModel().selectedIndexProperty().addListener(
-//			new RowSelectChangeListener());
-		
-//		add.setOnAction(new AddButtonListener());
+
+		add.setOnAction(new AddButtonListener());
 		delete.setOnAction(new DeleteButtonListener());
-		
+
+		// Wrap the ObservableList in a FilteredList (initially display all data).
+		FilteredList<TableOfCars> filteredData = new FilteredList<>(data, b -> true);
+
+		// 2. Set the filter Predicate whenever the filter changes.
+		searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredData.setPredicate(car -> {
+				// If filter text is empty, display all persons.
+
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
+
+				// Compare first name and last name of every person with filter text.
+				String lowerCaseFilter = newValue.toLowerCase();
+
+				if (String.valueOf(car.getColId()).toLowerCase().indexOf(lowerCaseFilter) != -1) {
+					return true; // Filter matches ID.
+				} else if (String.valueOf(car.getColStatus()).indexOf(lowerCaseFilter) != -1) {
+					return true;
+				} else if (car.getColLocation().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+					return true; // Filter matches location name.
+				} else if (car.getColBrand().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+					return true;
+				} else if (car.getColType().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+					return true;
+				} else if (car.getColStatus().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+					return true;
+				} else if (String.valueOf(car.getColPrice()).indexOf(lowerCaseFilter) != -1) {
+					return true;
+				} else if (String.valueOf(car.getColKm()).indexOf(lowerCaseFilter) != -1) {
+					return true;
+				} else
+					return false; // Does not match.
+			});
+		});
+
+		// 3. Wrap the FilteredList in a SortedList.
+		SortedList<TableOfCars> sortedData = new SortedList<>(filteredData);
+
+		// 4. Bind the SortedList comparator to the TableView comparator.
+		// Otherwise, sorting the TableView would have no effect.
+		sortedData.comparatorProperty().bind(carManagementTable.comparatorProperty());
+
+		// 5. Add sorted (and filtered) data to the table.
+		carManagementTable.setItems(sortedData);
+
 	}
-	
-	
-	// anderes Beispiel mit textfeldern youtube
+
 	public void onAddItem(ActionEvent event) {
-		TableOfCars entry = new TableOfCars(Integer.parseInt(idInput.getText()), locationInput.getText(), brandInput.getText(), typeInput.getText(), statusInput.getText(), Double.parseDouble(priceInput.getText()), Integer.parseInt(kmInput.getText()));
-		
+		TableOfCars entry = new TableOfCars(Integer.parseInt(idInput.getText()), locationInput.getText(),
+				brandInput.getText(), typeInput.getText(), statusInput.getText(),
+				Double.parseDouble(priceInput.getText()), Integer.parseInt(kmInput.getText()));
+
 		data.add(entry);
-		
-		clearForm();
 	}
-	
-	private void clearForm() {
-		idInput.clear();
-		locationInput.clear();
-		brandInput.clear();
-		typeInput.clear();
-		statusInput.clear();
-		priceInput.clear();
-		kmInput.clear();
-	}
-	
-	
+
 	// validates Textfield
 	public void textFieldValidator(TextField textfield) {
 		try {
 			textfield.textProperty().addListener(new ChangeListener<String>() {
-			    @Override
-			    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-			        String newValue) {
-			        if (!newValue.matches("[0-9]+\\.?([0-9]+)?")) {
-			        	textfield.setText(newValue.replaceAll("[^\\d]", ""));
-			        }
-			    }
-			});	
-		} catch(Exception e) {
+				@Override
+				public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+					if (!newValue.matches("[0-9]+\\.?([0-9]+)?")) {
+						textfield.setText(newValue.replaceAll("[^\\d]", ""));
+					}
+				}
+			});
+		} catch (Exception e) {
 			System.out.println("two or more commas were set");
 		}
 	}
-	
-//	private class RowSelectChangeListener implements ChangeListener<Number> {
-//
-//		@Override
-//		public void changed(ObservableValue<? extends Number> ov, 
-//				Number oldVal, Number newVal) {
-//
-//			int ix = newVal.intValue();
-//
-//			if ((ix < 0) || (ix >= data.size())) {
-//	
-//				return; // invalid data
-//			}
-//
-//			TableOfCars car = data.get(ix);	
-//		}
-//	}
-	
+
 	// befuellen der Tabelle
 	private ObservableList<TableOfCars> getInitialTableData() {
-			
-			List<TableOfCars> list = new ArrayList<>();
-			
-			list.add(new TableOfCars(1, "Name 1", "Name 2", "Name 3", "Name 4", 20.4, 91));
-			list.add(new TableOfCars(2, "Name 5", "Name 6", "Name 3", "Name 4", 40.4, 191));
-			
-	
-			ObservableList<TableOfCars> data = FXCollections.observableList(list);
-	
-			return data;
+
+		List<TableOfCars> list = new ArrayList<>();
+
+		list.add(new TableOfCars(1, "Berlin", "Tesla", "Name 3", "Name 4", 20.4, 91));
+		list.add(new TableOfCars(2, "Koeln", "Name 6", "available", "rented", 40.4, 191));
+		list.add(new TableOfCars(3, "Hamburg", "Name 6", "Name 3", "Name 4", 40.4, 191));
+		list.add(new TableOfCars(4, "Name 5", "BMW", "in repair", "Name 4", 40.4, 20));
+
+		ObservableList<TableOfCars> data = FXCollections.observableArrayList(list);
+
+		return data;
+	}
+
+	private class AddButtonListener implements EventHandler<ActionEvent> {
+
+		@Override
+		public void handle(ActionEvent e) {
+
+			// Create a new row after last row
+			TableOfCars car = new TableOfCars(0, locationInput.getText(), brandInput.getText(), typeInput.getText(),
+					statusInput.getText(), Double.parseDouble(priceInput.getText()),
+					Integer.parseInt(kmInput.getText()));
+			data.add(car);
+			int row = data.size() - 1;
+
+//			 Select the new row
+			carManagementTable.requestFocus();
+			carManagementTable.getSelectionModel().select(row);
+			carManagementTable.getFocusModel().focus(row);
+
+			locationInput.clear();
+			brandInput.clear();
+			typeInput.clear();
+			statusInput.clear();
+			priceInput.clear();
+			kmInput.clear();
+
 		}
-	 
-	
-//	private class AddButtonListener implements EventHandler<ActionEvent> {
-//
-//		@Override
-//		public void handle(ActionEvent e) {
-//
-//			// Create a new row after last row
-//			TableOfCars car = new TableOfCars(0, "...", "...", "...", "...", 0.00, 0);
-//			data.add(car);
-//			int row = data.size() - 1;
-//
-////			 Select the new row
-//			carManagementTable.requestFocus();
-//			carManagementTable.getSelectionModel().select(row);
-//			carManagementTable.getFocusModel().focus(row);
-//		
-//		}
-//	}
-	
+	}
+
 	// delete row (abfangen, wenn Tabelle leer ist)
 	private class DeleteButtonListener implements EventHandler<ActionEvent> {
 
@@ -245,13 +212,13 @@ public class FXMLDocumentController implements Initializable {
 			// Select a row
 
 			if (carManagementTable.getItems().size() == 0) {
-				
+
 				return;
 			}
 
 			if (ix != 0) {
 
-				ix = ix -1;
+				ix = ix - 1;
 			}
 
 			carManagementTable.requestFocus();
@@ -259,5 +226,5 @@ public class FXMLDocumentController implements Initializable {
 			carManagementTable.getFocusModel().focus(ix);
 		}
 	}
-	
+
 }
