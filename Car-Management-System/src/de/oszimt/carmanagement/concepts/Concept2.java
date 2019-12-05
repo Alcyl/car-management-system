@@ -19,4 +19,10 @@ public class Concept2 extends Concept{
 	   }
 	}
 
+	@Override
+	public void testing() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -7,7 +7,6 @@ public class Test {
 	public static void main(String[] args) {
 		
 		Concept1 concept1 = new Concept1(new XmlDatabase());
-		concept1.sort();
 		concept1.someMethod();
 
 	}
